@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'net.serenity-bdd:serenity-core:3.3.10'
+    testImplementation 'net.serenity-bdd:serenity-rest-assured:3.3.10'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:3.3.10'
+    testImplementation 'junit:junit:4.13.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+//test {
+//    useJUnitPlatform()
+//}
+
+task myZip(type: Zip){
+    from 'target/site/serenity/'
+    archiveName('Serenity_Test_Report.zip')
+    destinationDir(file('artefacts/reports'))
+}
