@@ -14,7 +14,7 @@
 
 
 2. Clone the code
-##### GIT Repo Path (need to be updated) #######
+##### GIT Repo Path: https://github.com/krishnachaitanya83/where-the-iss-project.git #######
 It should now clone using SSH key only (no credentials required)
 
 
