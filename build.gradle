@@ -21,10 +21,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
-test {
-    environment "CUCUMBER_PUBLISH_TOKEN", "f69ad24d-140a-407e-a008-00a9f0c83419"
-
-}
+//test {
+//    environment "CUCUMBER_PUBLISH_TOKEN", "f69ad24d-140a-407e-a008-00a9f0c83419"
+//
+//}
 
 task myZip(type: Zip){
     from 'target/site/serenity/'

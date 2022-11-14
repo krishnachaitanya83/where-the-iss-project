@@ -18,16 +18,17 @@ public class SatDataValidation extends PageObject {
     public final Logger logger = LoggerFactory.getLogger(SatDataValidation.class);
     public static final String BASE_URL = "https://api.wheretheiss.at/v1";
     public static final String URI = "/satellites";
-    Properties prop = APIUtils.readPropertiesFile("config.properties");
 
-    public SatDataValidation() throws IOException {
-    }
 
+    //This method is to get the satellite data from the API.
     public void list_Of_Satellites() {
         String data = APIUtils.getResponseData("/satellites");
         logger.info(data);
     }
 
+
+    //This method is to get the satellite data from the API and it will return the Satellite ID
+    // to be consumed by other methods as parameter
     public String response_The_ListOfAvailableSatellites() {
         RestAssured.given().when().baseUri(BASE_URL).get(URI).then().log().all().
                 assertThat().
@@ -39,6 +40,7 @@ public class SatDataValidation extends PageObject {
         return satId;
     }
 
+    //This method validates the response code that returns the satellites details
     public void response_responseCodeShouldBe(String responseCode) {
         APIUtils.assertGetRequest("/satellites", responseCode);
     }

@@ -21,7 +21,7 @@ Feature: Test runs for finding the position of ISS
     Then the user is getting all the information about the satellite position, velocity and other details
 
   @SatellitePositionRespUnits @Valid
-  Scenario Outline:Get position, velocity and other related information about satellite.
+  Scenario Outline:Get position, velocity and other information and validate the units data based on the value provided.
     Given user perform GET request to retrieve satellite position based on satellite id
     And the user get a valid response for the satellite position info
     When the user provides the units parameter in "<Provided Units>"
@@ -34,7 +34,7 @@ Feature: Test runs for finding the position of ISS
 
 
   @SatellitePositionOnTimestamp @Valid
-  Scenario Outline: This API returns position, velocity and other related information about satellite.
+  Scenario Outline: This API returns position, velocity and other information based on the valid timestamps provided by user.
     Given user perform GET request to retrieve satellite position based on provided "<Time Stamps>"
     Then the user is getting the details based on the provided "<Time Stamps>"
     @Valid
@@ -55,7 +55,7 @@ Feature: Test runs for finding the position of ISS
 #      | 1857313740000 |
 
   @SatellitePositionOnTimestamp @Invalid
-  Scenario Outline: This API returns position, velocity and other related information about satellite.
+  Scenario Outline: This API returns and error message on providing the invalid timestamp.
     Given user perform GET request to retrieve satellite position based on provided invalid "<Time Stamps>"
     When the user is getting the details based on the provided invalid "<Time Stamps>"
     Then response code received should be "<Response Code>" for the timestamp "<Time Stamps>"
@@ -66,7 +66,7 @@ Feature: Test runs for finding the position of ISS
 
 
   @SatellitePositionOnMultipleTimestamp @Valid
-  Scenario Outline: This API returns position, velocity and other related information about satellite.
+  Scenario Outline: This API returns position, velocity and other details for multiple timestamps separated by comma.
     Given user perform GET request to retrieve satellite position based on provided "<Time Stamps>"
     When the user is getting the details based on the provided "<Time Stamps>"
     And the response for all the provided "<Time Stamps>" are received properly
@@ -79,7 +79,7 @@ Feature: Test runs for finding the position of ISS
 
 
   @SatellitePositionRespTimestamp @Invalid
-  Scenario Outline: This API returns position, velocity and other related information about satellite.
+  Scenario Outline: This API returns position,velocity and other details for the current timestamp only.
     Given user perform GET request to retrieve satellite position based on satellite id
     And the user get a valid response for the satellite position info
     Then And the user is getting the details only for the current timestamp on providing other "<Time Stamps>"
@@ -90,7 +90,7 @@ Feature: Test runs for finding the position of ISS
 
 
   @SatellitePositionOnMultipleTimestamp @InValid
-  Scenario Outline: This API returns position, velocity and other related information about satellite.
+  Scenario Outline: This API returns the units in kilometers on providing the invalid units and it supports more than 10 timestamps as well.
     Given user perform GET request to retrieve satellite position based on provided "<Time Stamps>"
     When the user is getting the details based on the provided "<Time Stamps>"
     Then the user is getting the unit value as default on providing invalid "<User Provided Units>" for all the "<Time Stamps>"
@@ -125,7 +125,7 @@ Feature: Test runs for finding the position of ISS
 
 
   @SatellitePositionCoordinatesData @Invalid
-  Scenario Outline: This API returns position, current time offset, country code, and timezone id for a given set of coordinates in the format of longitude,latitude in the format of longitude,latitude
+  Scenario Outline: This API returns error response on providing the invalid data
     Given user perform GET request to retrieve satellite coordinate data with "<Lat Long Data>"
     Then the user is getting the "<Response Code>" based on "<Lat Long Data>"
     Examples:

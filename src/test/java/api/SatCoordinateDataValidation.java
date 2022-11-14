@@ -18,14 +18,17 @@ public class SatCoordinateDataValidation extends PageObject {
     public static final String URI = "/coordinates/";
     Properties prop = APIUtils.readPropertiesFile("config.properties");
 
-    public SatCoordinateDataValidation() throws IOException {
+    private SatCoordinateDataValidation() throws IOException {
     }
 
+
+    //This method is validating if the API is sending any response.
     public void request_GETRequestToRetrieveSatCoordinateData(String latLongData){
         Response response = RestAssured.given().when().baseUri(BASE_URL).get(URI + latLongData);
         response.prettyPrint();
     }
 
+    //This method is validating if the response is in JSON format
     public void response_GettingTheCoordinatesDataInJASONFormat(){
         Response response = RestAssured.given().when().baseUri(BASE_URL).get(URI + prop.getProperty("latandlong"));
         System.out.println("The response type is ====>>>>>>>>> " +response.getContentType());
@@ -33,6 +36,8 @@ public class SatCoordinateDataValidation extends PageObject {
         Assert.assertTrue(responseType.equalsIgnoreCase("application/json"));
     }
 
+
+    //This method is validating the response data and its options properly received.
     public void response_DataIsProperlyGettingDisplayed(String latLongData) {
         ValidatableResponse response = RestAssured.given().
                 when().baseUri(BASE_URL).get(URI + latLongData).then().log().all().
@@ -48,6 +53,8 @@ public class SatCoordinateDataValidation extends PageObject {
 
     }
 
+
+    //This method is validating the response data and its options properly received and the data is matching the values.
     public void response_DataDisplayedAsProvidedLatLongDetails(String latitude, String longitude, String timeZoneId, String countryCode, String latLongData) {
         ValidatableResponse response = RestAssured.given().
                 when().baseUri(BASE_URL).get(URI + latLongData).then().log().all().
@@ -58,9 +65,5 @@ public class SatCoordinateDataValidation extends PageObject {
             Assert.assertEquals("longitude is displayed", jsonMap.get("longitude"),longitude);
             Assert.assertEquals("timezone is displayed", jsonMap.get("timezone_id"),timeZoneId);
             Assert.assertEquals("offset is displayed", jsonMap.get("country_code"), countryCode);
-    }
-
-    public void response_theUserIsGettingTheResponseOnDetails(String responseCode, String latLongData){
-
     }
 }
