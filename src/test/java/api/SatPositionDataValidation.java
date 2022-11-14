@@ -1,7 +1,8 @@
-package page;
+package api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.response.ValidatableResponse;
 import net.serenitybdd.core.pages.PageObject;
 import org.hamcrest.Matchers;
@@ -164,5 +165,29 @@ public class SatPositionDataValidation extends PageObject {
             Assert.assertEquals("name is displayed", r.get("units"), "kilometers");
 
         }
+    }
+
+    public void request_RequestToRetrieveSatellitePositionInvalidTimestamp(String timeStamps){
+        ValidatableResponse response = RestAssured.given().queryParam("timestamps",timeStamps).
+                when().baseUri(BASE_URL).get(URI+prop.getProperty("id")+"/positions").then().log().all();
+
+    }
+
+
+    public void response_GettingTheDetailsBasedOnInvalidTimeStamp(String timeStamps){
+        ValidatableResponse response = RestAssured.given().queryParam("timestamps",timeStamps).
+                when().baseUri(BASE_URL).get(URI+prop.getProperty("id")+"/positions").then().log().all();
+
+        LinkedHashMap<String, ?> jsonMap = response.extract().jsonPath().get();
+        Assert.assertTrue("error is displayed", jsonMap.containsKey("error"));
+        Assert.assertTrue("status is displayed", jsonMap.containsKey("status"));
+    }
+
+
+    public void response_CodeReceivedForTheTimestamp(String responseCode, String timeStamps){
+        ValidatableResponse response = RestAssured.given().queryParam("timestamps",timeStamps).
+                when().baseUri(BASE_URL).get(URI+prop.getProperty("id")+"/positions").then().log().all().assertThat().
+                statusCode(400).body("status", Matchers.equalTo(Integer.parseInt(responseCode)));
+
     }
 }

@@ -1,9 +1,8 @@
-package page;
+package api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import net.serenitybdd.core.pages.PageObject;
-import org.hamcrest.Matchers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,9 +32,6 @@ public class SatDataValidation extends PageObject {
         RestAssured.given().when().baseUri(BASE_URL).get(URI).then().log().all().
                 assertThat().
                 statusCode(200);
-//                body("id", Matchers.equalTo(prop.getProperty("id"))).
-//                body("name", Matchers.equalTo(prop.getProperty("name")));
-
         Response response = APIUtils.getResponse("/satellites");
         ArrayList<Integer> id = response.getBody().jsonPath().get("id");
         String satId = id.stream().map(Object::toString)

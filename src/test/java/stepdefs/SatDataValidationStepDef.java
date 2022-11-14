@@ -1,7 +1,7 @@
 package stepdefs;
 
 import io.cucumber.java.en.And;
-import page.SatDataValidation;
+import api.SatDataValidation;
 
 
 public class SatDataValidationStepDef {

@@ -4,8 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.thucydides.core.annotations.Steps;
-import page.SatCoordinateDataValidation;
-import page.SatTLESDataValidation;
+import api.SatCoordinateDataValidation;
 
 
 public class SatCoordinatesDataValidationStepDef {

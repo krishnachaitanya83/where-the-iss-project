@@ -1,16 +1,11 @@
 package stepdefs;
 
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.restassured.response.Response;
 import net.thucydides.core.annotations.Steps;
-import page.SatDataValidation;
-import page.SatPositionDataValidation;
-
-import java.util.List;
+import api.SatPositionDataValidation;
 
 
 public class SatPositionDataValidationStepDef {
@@ -81,5 +76,20 @@ public class SatPositionDataValidationStepDef {
     @And("the user is getting the unit value as default on providing invalid {string} for all the {string}")
     public void response_GettingDefaultUnitValueOnProvidingInvalid_StepDef(String unitValue, String timeStamps) {
         satPositionDataValidation.response_GettingDefaultUnitValueOnProvidingInvalid(unitValue, timeStamps);
+    }
+
+    @Given("user perform GET request to retrieve satellite position based on provided invalid {string}")
+    public void request_RequestToRetrieveSatellitePositionInvalidTimestamp_StepDef(String timeStamps) {
+        satPositionDataValidation.request_RequestToRetrieveSatellitePositionInvalidTimestamp(timeStamps);
+    }
+
+    @When("the user is getting the details based on the provided invalid {string}")
+    public void response_GettingTheDetailsBasedOnInvalidTimeStamp_StepDef(String timeStamps) {
+        satPositionDataValidation.response_GettingTheDetailsBasedOnInvalidTimeStamp(timeStamps);
+    }
+
+    @Then("response code received should be {string} for the timestamp {string}")
+    public void response_CodeReceivedForTheTimestamp_StepDef(String responseCode, String timeStamps) {
+        satPositionDataValidation.response_CodeReceivedForTheTimestamp(responseCode, timeStamps);
     }
 }

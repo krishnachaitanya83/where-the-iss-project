@@ -1,9 +1,12 @@
 plugins {
     id 'java'
+    id "net.serenity-bdd.serenity-gradle-plugin" version "3.4.2"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+
 
 repositories {
     mavenCentral()
@@ -11,16 +14,17 @@ repositories {
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    testImplementation 'net.serenity-bdd:serenity-core:3.3.10'
-    testImplementation 'net.serenity-bdd:serenity-rest-assured:3.3.10'
-    testImplementation 'net.serenity-bdd:serenity-cucumber:3.3.10'
+    testImplementation 'net.serenity-bdd:serenity-core:3.4.2'
+    testImplementation 'net.serenity-bdd:serenity-rest-assured:3.4.2'
+    testImplementation 'net.serenity-bdd:serenity-cucumber:3.4.2'
     testImplementation 'junit:junit:4.13.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
-//test {
-//    useJUnitPlatform()
-//}
+test {
+    environment "CUCUMBER_PUBLISH_TOKEN", "f69ad24d-140a-407e-a008-00a9f0c83419"
+
+}
 
 task myZip(type: Zip){
     from 'target/site/serenity/'
