@@ -66,4 +66,12 @@ public class SatCoordinateDataValidation extends PageObject {
             Assert.assertEquals("timezone is displayed", jsonMap.get("timezone_id"),timeZoneId);
             Assert.assertEquals("offset is displayed", jsonMap.get("country_code"), countryCode);
     }
+
+
+    public void response_theUserIsGettingTheResponseOnDetails(String responseCode, String latLongData){
+        ValidatableResponse response = RestAssured.given().
+                when().baseUri(BASE_URL).get(URI + latLongData).then().log().all().
+                assertThat().statusCode(Integer.parseInt(responseCode));
+
+    }
 }

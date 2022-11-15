@@ -7,7 +7,6 @@ import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.*;
 

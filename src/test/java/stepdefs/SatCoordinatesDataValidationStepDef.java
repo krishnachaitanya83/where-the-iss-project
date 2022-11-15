@@ -38,7 +38,4 @@ public class SatCoordinatesDataValidationStepDef {
         satCoordinateDataValidation.response_theUserIsGettingTheResponseOnDetails(responseCode, latLongData);
     }
 
-    @Given("")
-    public void userPerformGETRequestToRetrieveSatelliteCoordinateDataWith(String arg0) {
-    }
 }
